@@ -97,7 +97,17 @@ export function Chat() {
 				))}
 				<li ref={lastMessageRef} />
 			</ul>
-			<form onSubmit={handleSubmit} className="relative" ref={formRef}>
+			<form
+				onSubmit={(e) => {
+					if (isLoading) {
+						stop();
+						return;
+					}
+					handleSubmit(e);
+				}}
+				className="relative"
+				ref={formRef}
+			>
 				<Textarea
 					placeholder="Type a message"
 					value={input}
